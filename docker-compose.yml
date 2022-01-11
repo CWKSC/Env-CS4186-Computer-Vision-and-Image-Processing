@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  env_python_cs4186:
+    container_name: env_python_cs4186
+    image: env_python_cs4186
+    build: .
+    hostname: env_python_cs4186
+    volumes:
+      - ./workspace:/workspace
