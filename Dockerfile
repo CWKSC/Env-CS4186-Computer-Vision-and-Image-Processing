@@ -1,10 +1,10 @@
 FROM python:latest
 
-# https://gradle.org/install/
-
-ENV GRADLE_VERSION=7.3.3
-
 SHELL ["/bin/bash", "-c"]
+
+RUN apt update && apt install -y \
+    python3-opencv \
+    libgl1-mesa-glx
 
 COPY ./resource/requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
