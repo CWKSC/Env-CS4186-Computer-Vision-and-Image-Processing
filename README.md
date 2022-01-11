@@ -1,8 +1,8 @@
 # Note-CS4186-Computer-Vision-and-Image-Processing
 
-Provided Docker image as environment,Windows
+Provided Docker image as environment, Windows
 
-Start docker desktop first
+Start Docker Desktop first
 
 ```
 build.cmd
