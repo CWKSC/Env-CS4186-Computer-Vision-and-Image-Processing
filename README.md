@@ -1,6 +1,21 @@
 # Note-CS4186-Computer-Vision-and-Image-Processing
 
-Provided Docker image as environment, Windows
+## Python venv
+
+Run `build_venv.cmd` to build `venv/`
+
+```
+build_venv.cmd
+.\venv\Scripts\activate
+// ...
+deactivate
+```
+
+## Docker
+
+Docker image as environment is also provided
+
+But one of the problem is no GUI display, so `matplotlib` will not working
 
 Start Docker Desktop first
 
