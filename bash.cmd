@@ -1,1 +1,0 @@
-docker exec -it env_python_cs4186 /bin/bash

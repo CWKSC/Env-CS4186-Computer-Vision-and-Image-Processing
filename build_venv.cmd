@@ -8,7 +8,7 @@ pip3 install numpy
 pip3 install matplotlib 
 pip3 install black
 
-pip3 freeze > ./resource/requirements.txt
+pip3 freeze > ./requirements.txt
 
 pause
 deactivate
