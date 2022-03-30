@@ -15,7 +15,7 @@ def applyKernal(image: list[list[int]], kernal: list[list[int]]) -> list[list[in
     ):
         sum: int = 0
         for (kernalRow, kernalCol), (offsetRow, offsetCol) in zip(
-            Array2DUtil.iter(kernal), Array2DUtil.centerAlignIter(kernal)
+            Array2DUtil.iter(kernal), Array2DUtil.centerAlignOffsetIter(kernal)
         ):
             sum += (
                 image[paddingRow + offsetRow][paddingCol + offsetCol]
@@ -34,10 +34,9 @@ def gaussianFunc(x: int, y: int, sd: float = 1.0) -> float:
     return math.exp(-(x**2 + y**2) / (2 * sd**2)) / (2 * math.pi * sd**2)
 
 
-def genGaussianKernel(k: int = 1, sd: int = 1) -> list[list[float]]:
-    result = list(Array2DUtil.centerAlignArray2D(k))
-    map(lambda x, y: gaussianFunc(x, y, sd), result)
+def genGaussianKernel(k: int = 1, sd: float = 1.0) -> list[list[float]]:
+    result = list(Array2DUtil.centerAlignOffsetArray2D(k))
+    result = Array2DUtil.map(result, lambda ele, r, c: gaussianFunc(ele[0], ele[1], sd))
     sum = Array2DUtil.sum(result)
-    map(lambda x: x / sum, result)
+    result = Array2DUtil.map(result, lambda ele, r, c: ele / sum)
     return result
-

@@ -1,14 +1,28 @@
 # Gσ = e^(- (x^2 + y^2) / (2σ^2)) / (2 pi σ^2)
 # σ is Standard Deviation (SD)
 
+import math
+
+import numpy as np
 import Util.KernalUtil as KernalUtil
 
-print(KernalUtil.genGaussianKernel(1))
+
+print(np.array(KernalUtil.genGaussianKernel(1, sd=math.sqrt(0.5))))
+# [[0.04491922 0.12210311 0.04491922]
+#  [0.12210311 0.33191066 0.12210311]
+#  [0.04491922 0.12210311 0.04491922]]
+
+print(np.array(KernalUtil.genGaussianKernel(1)))
 # [[0.07511361 0.1238414  0.07511361]
 #  [0.1238414  0.20417996 0.1238414 ]
 #  [0.07511361 0.1238414  0.07511361]]
 
-print(KernalUtil.genGaussianKernel(2))
+print(np.array(KernalUtil.genGaussianKernel(1, sd=5)))
+# [[0.1096297  0.11184436 0.1096297 ]
+#  [0.11184436 0.11410377 0.11184436]
+#  [0.1096297  0.11184436 0.1096297 ]]
+
+print(np.array(KernalUtil.genGaussianKernel(2)))
 # [[0.00296902 0.01330621 0.02193823 0.01330621 0.00296902]
 #  [0.01330621 0.0596343  0.09832033 0.0596343  0.01330621]
 #  [0.02193823 0.09832033 0.16210282 0.09832033 0.02193823]

@@ -309,8 +309,9 @@ def test_paddingIter_raise():
         list(Array2DUtil.paddingIter([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 2))
 
 
-def test_center2dIter():
-    assert list(Array2DUtil.centerAlignIter([[1, 2, 3], [4, 5, 6], [7, 8, 9]])) == [
+def test_centerAlignOffsetIter():
+    assert list(Array2DUtil.centerAlignOffsetIter([[1]])) == [(0, 0)]
+    assert list(Array2DUtil.centerAlignOffsetIter([[1, 2, 3], [4, 5, 6], [7, 8, 9]])) == [
         (-1, -1),
         (-1, 0),
         (-1, 1),
@@ -319,5 +320,88 @@ def test_center2dIter():
         (0, 1),
         (1, -1),
         (1, 0),
-        (1, 1)
+        (1, 1),
     ]
+    assert list(
+        Array2DUtil.centerAlignOffsetIter(
+            [
+                [1, 2, 3, 4, 5],
+                [6, 7, 8, 9, 10],
+                [11, 12, 13, 14, 15],
+                [16, 17, 18, 19, 20],
+                [21, 22, 23, 24, 25],
+            ]
+        )
+    ) == [
+        (-2, -2),
+        (-2, -1),
+        (-2, 0),
+        (-2, 1),
+        (-2, 2),
+        (-1, -2),
+        (-1, -1),
+        (-1, 0),
+        (-1, 1),
+        (-1, 2),
+        (0, -2),
+        (0, -1),
+        (0, 0),
+        (0, 1),
+        (0, 2),
+        (1, -2),
+        (1, -1),
+        (1, 0),
+        (1, 1),
+        (1, 2),
+        (2, -2),
+        (2, -1),
+        (2, 0),
+        (2, 1),
+        (2, 2),
+    ]
+
+
+def test_centerAlignOffsetArray2D():
+    assert list(Array2DUtil.centerAlignOffsetArray2D(0)) == [[(0, 0)]]
+    assert list(Array2DUtil.centerAlignOffsetArray2D(1)) == [
+        [(-1, -1), (-1, 0), (-1, 1)],
+        [(0, -1), (0, 0), (0, 1)],
+        [(1, -1), (1, 0), (1, 1)],
+    ]
+    assert list(Array2DUtil.centerAlignOffsetArray2D(2)) == [
+        [(-2, -2), (-2, -1), (-2, 0), (-2, 1), (-2, 2)],
+        [(-1, -2), (-1, -1), (-1, 0), (-1, 1), (-1, 2)],
+        [(0, -2), (0, -1), (0, 0), (0, 1), (0, 2)],
+        [(1, -2), (1, -1), (1, 0), (1, 1), (1, 2)],
+        [(2, -2), (2, -1), (2, 0), (2, 1), (2, 2)],
+    ]
+
+
+def test_map():
+    assert Array2DUtil.map(
+        [[1, 2, 3], [4, 5, 6], [7, 8, 9]], lambda ele, r, c: ele + 1
+    ) == [
+        [2, 3, 4],
+        [5, 6, 7],
+        [8, 9, 10],
+    ]
+    assert Array2DUtil.map(
+        [[0, 0, 0], [0, 0, 0], [0, 0, 0]], lambda ele, r, c: r + c
+    ) == [
+        [0, 1, 2],
+        [1, 2, 3],
+        [2, 3, 4],
+    ]
+
+
+def test_sum():
+    assert Array2DUtil.sum([[1, 2], [3, 4]]) == 10
+    assert Array2DUtil.sum([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == 45
+    assert (
+        Array2DUtil.sum([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
+        == 136
+    )
+    assert (
+        Array2DUtil.sum([[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [9.0, 10.0, 11.0, 12.0], [13.0, 14.0, 15.0, 16.0]])
+        == 136.0
+    )
