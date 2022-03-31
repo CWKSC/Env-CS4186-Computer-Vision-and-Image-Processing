@@ -9,9 +9,9 @@ import Util.Array2DUtil as Array2DUtil
 def applyKernal(image: list[list[int]], kernal: list[list[int]]) -> list[list[int]]:
     (row, col) = Array2DUtil.getRowCol(image)
     k = Array2DUtil.getRadius(kernal)
-    result = Array2DUtil.zero(row - 2 * k, col - 2 * k)
-    for (paddingRow, paddingCol), (resultRow, resultCol) in zip(
-        Array2DUtil.paddingIter(image, k), Array2DUtil.iter(result)
+    result = Array2DUtil.paddingZero(row, col, k)
+    for (resultRow, resultCol), (paddingRow, paddingCol) in zip(
+        Array2DUtil.iter(result), Array2DUtil.paddingIter(image, k)
     ):
         sum: int = 0
         for (kernalRow, kernalCol), (offsetRow, offsetCol) in zip(

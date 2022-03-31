@@ -1,9 +1,9 @@
+from re import A
 import pytest
 import Util.Array2DUtil as Array2DUtil
 
 
 def test_zero():
-
     assert Array2DUtil.zero(1, 1) == [[0]]
     assert Array2DUtil.zero(2, 2) == [[0, 0], [0, 0]]
     assert Array2DUtil.zero(3, 3) == [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -39,6 +39,36 @@ def test_zero_raise():
         Array2DUtil.zero(1, 0)
     with pytest.raises(ValueError):
         Array2DUtil.zero(0, 1)
+
+
+def test_paddingZero():
+    assert Array2DUtil.paddingZero(3, 3, 1) == [[0]]
+    assert Array2DUtil.paddingZero(4, 4, 1) == [[0, 0], [0, 0]]
+    assert Array2DUtil.paddingZero(5, 5, 1) == [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    assert Array2DUtil.paddingZero(5, 5, 2) == [[0]]
+    assert Array2DUtil.paddingZero(6, 6, 1) == [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+    ]
+    assert Array2DUtil.paddingZero(6, 6, 2) == [[0, 0], [0, 0]]
+
+
+def test_paddingZero_raise():
+    with pytest.raises(ValueError):
+        Array2DUtil.paddingZero(0, 0, 0)
+    with pytest.raises(ValueError):
+        Array2DUtil.paddingZero(0, 1, 0)
+    with pytest.raises(ValueError):
+        Array2DUtil.paddingZero(1, 0, 0)
+
+    with pytest.raises(ValueError):
+        Array2DUtil.paddingZero(3, 3, 2)
+    with pytest.raises(ValueError):
+        Array2DUtil.paddingZero(4, 4, 2)
+    with pytest.raises(ValueError):
+        Array2DUtil.paddingZero(5, 5, 3)
 
 
 def test_getRowCol():
@@ -311,7 +341,9 @@ def test_paddingIter_raise():
 
 def test_centerAlignOffsetIter():
     assert list(Array2DUtil.centerAlignOffsetIter([[1]])) == [(0, 0)]
-    assert list(Array2DUtil.centerAlignOffsetIter([[1, 2, 3], [4, 5, 6], [7, 8, 9]])) == [
+    assert list(
+        Array2DUtil.centerAlignOffsetIter([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    ) == [
         (-1, -1),
         (-1, 0),
         (-1, 1),
@@ -402,6 +434,13 @@ def test_sum():
         == 136
     )
     assert (
-        Array2DUtil.sum([[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0], [9.0, 10.0, 11.0, 12.0], [13.0, 14.0, 15.0, 16.0]])
+        Array2DUtil.sum(
+            [
+                [1.0, 2.0, 3.0, 4.0],
+                [5.0, 6.0, 7.0, 8.0],
+                [9.0, 10.0, 11.0, 12.0],
+                [13.0, 14.0, 15.0, 16.0],
+            ]
+        )
         == 136.0
     )

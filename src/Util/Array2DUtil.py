@@ -7,6 +7,19 @@ def zero(row: int, col: int) -> list[list[int]]:
     return [[0 for _ in range(col)] for _ in range(row)]
 
 
+def paddingZero(row: int, col: int, padding: int) -> list[list[int]]:
+    if row <= 0 or col <= 0:
+        raise ValueError("Invalid row or col")
+    if padding < 0:
+        raise ValueError("Invalid padding, padding < 0")
+    minRadius = min(row, col) // 2
+    if padding > minRadius:
+        raise ValueError(
+            f"Invalid padding, padding > minRadius, padding: {padding}, minRadius: {minRadius}"
+        )
+    return zero(row - 2 * padding, col - 2 * padding)
+
+
 def getRow(array2d: list[list[Any]]) -> int:
     return len(array2d)
 
@@ -21,7 +34,7 @@ def getRowCol(array2d: list[list[Any]]) -> tuple[int, int]:
 
 def getMinRadius(array2d: list[list[Any]]) -> int:
     (row, col) = getRowCol(array2d)
-    return min(row // 2, col // 2)
+    return min(row, col) // 2
 
 
 def getRadius(array2d: list[list[Any]]) -> int:
@@ -56,7 +69,9 @@ def paddingIter(array2d: list[list[int]], padding: int) -> Generator:
     )
 
 
-def centerAlignOffsetIter(array2d: list[list[int]]) -> Generator[tuple[int, int], None, None]:
+def centerAlignOffsetIter(
+    array2d: list[list[int]],
+) -> Generator[tuple[int, int], None, None]:
     k = getRadius(array2d)
     return ((r - k, c - k) for (r, c) in iter(array2d))
 
