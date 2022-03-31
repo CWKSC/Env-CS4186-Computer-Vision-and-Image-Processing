@@ -6,7 +6,7 @@ import numpy as np
 import Util.Array2DUtil as Array2DUtil
 
 
-def applyKernal(image: list[list[int]], kernal: list[list[int]]) -> list[list[int]]:
+def applyKernel(image: list[list[int]], kernal: list[list[float]]) -> list[list[float]]:
     (row, col) = Array2DUtil.getRowCol(image)
     k = Array2DUtil.getRadius(kernal)
     result = Array2DUtil.paddingZero(row, col, k)
@@ -25,7 +25,7 @@ def applyKernal(image: list[list[int]], kernal: list[list[int]]) -> list[list[in
     return result
 
 
-def genMeanKernal(k: int = 1):
+def genMeanKernel(k: int = 1) -> list[list[float]]:
     length = 2 * k + 1
     return np.full((length, length), 1 / (length * length))
 

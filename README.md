@@ -11,6 +11,8 @@ build_venv.cmd
 deactivate
 ```
 
+Then open with Visual Studio Code
+
 ## Add another python package
 
 Modify `build_venv.cmd`, add `pip3 install <package>`
